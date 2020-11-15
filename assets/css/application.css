@@ -1,0 +1,36 @@
+---
+---
+* {
+  text-decoration: none;
+  color: #000;
+}
+
+.header-container {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: stretch;
+  margin: 2% 0%;
+  border-style: none none solid none;
+  border-width: 1px;
+}
+
+.header-title {
+  font-size: 40px;
+  display: inline-block;
+  margin: 0% 5% 0% 0%
+}
+
+.header-nav {
+  font-size: 20px;
+  display: inline-flex;
+  margin: 0% 4% 0% 0%;
+  align-items: center;
+}
+
+.nav-item {
+  margin: 0% 30px 0% 0%;
+}
+
+.nav-item:hover {
+  text-decoration: underline;
+}
