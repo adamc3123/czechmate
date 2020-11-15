@@ -34,3 +34,29 @@
 .nav-item:hover {
   text-decoration: underline;
 }
+
+#chess-board-container table,
+#chess-board-container td {
+  border: 1px solid;
+  border-collapse: collapse;
+}
+
+#chess-board-container table {
+  width: 600px;
+  height: 600px;
+}
+
+.chess-board {
+}
+
+.rank {
+}
+
+.file {
+}
+
+footer {
+  margin: 2% 0%;
+  border-style: solid none none none;
+  border-width: 1px;
+}
