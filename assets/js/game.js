@@ -8,7 +8,6 @@ var Game = function(boardHandler) {
   var initialize = function(boardHandler) {
     var board = boardHandler();
     board.new();
-    console.log("init");
   }(boardHandler);
 
   return {
