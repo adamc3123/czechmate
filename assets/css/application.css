@@ -41,18 +41,28 @@
   border-collapse: collapse;
 }
 
+#chess-board-container tr td {
+    background-color: #f0d9b5;
+}
+
+#chess-board-container tr:nth-child(even) td:nth-child(odd),
+#chess-board-container tr:nth-child(odd) td:nth-child(even) {
+    background-color: #b58863;
+}
+
 #chess-board-container table {
   width: 600px;
   height: 600px;
 }
 
-.chess-board {
+.square {
+  text-align: center;
 }
 
-.rank {
-}
-
-.file {
+.piece {
+  width: 100%;
+  height: auto;
+  vertical-align: middle;
 }
 
 footer {

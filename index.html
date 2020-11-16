@@ -10,7 +10,9 @@ files: [a,b,c,d,e,f,g,h]
         {% for row in (1..8) reversed %}
           <tr id="rank_{{row}}" class="rank">
             {% for col in (0..7) %}
-              <td id="square_{{row}}{{page.files[col]}}" class="file">{{row}}{{page.files[col]}}</td>
+              <td id="square_{{row}}{{page.files[col]}}">
+                <div class="square"><img class="piece" src="assets/images/bdt.svg"></div>
+              </td>
             {% endfor %}
           </tr>
         {% endfor %}
