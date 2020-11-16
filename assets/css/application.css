@@ -53,10 +53,15 @@
 #chess-board-container table {
   width: 600px;
   height: 600px;
+  table-layout: fixed;
 }
 
 .square {
   text-align: center;
+}
+
+.cell {
+  height: calc(600px / 8);
 }
 
 .piece {
