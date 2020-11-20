@@ -18,7 +18,7 @@ files: [a,b,c,d,e,f,g,h]
             {% for col in (0..7) %}
               <td id="square_{{page.files[col]}}{{row}}" class="cell dropzone"
                   data-file='{{page.files[col]}}' data-rank='{{row}}'>
-                <div class="square"><img class="piece draggable" draggable="true" src=""></div>
+                <div class="square"><img class="piece" draggable="true" src=""></div>
               </td>
             {% endfor %}
           </tr>

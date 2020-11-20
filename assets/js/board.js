@@ -104,7 +104,7 @@ var Board = function() {
   };
 
   var initPieceHandlers = function() {
-    interact('.draggable').draggable({
+    interact('.' + PIECE_CLASS).draggable({
       listeners: {
         move: dragMoveListener,
       },
