@@ -1,9 +1,9 @@
 var Board = function() {
-  var FILES = ["a", "b", "c", "d", "e", "f", "g", "h"];
+  var FILES = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
   var RANKS = [1, 2, 3, 4, 5, 6, 7, 8];
 
-  var SQUARE_CLASS = "square";
-  var PIECE_CLASS = "piece";
+  var SQUARE_CLASS = 'square';
+  var PIECE_CLASS = 'piece';
 
   var board = null;
 
@@ -22,13 +22,13 @@ var Board = function() {
     var squares = document.getElementsByClassName(SQUARE_CLASS);
 
     for (var i = 0; i < squares.length; i++) {
-      squares[i].querySelector("." + PIECE_CLASS).src = "";
+      resetPieceElement(squares[i].querySelector('.' + PIECE_CLASS));
     }
   };
 
   var getPieceBySquareId = function(squareId) {
     return document.getElementById(squareId)
-                   .querySelector("." + PIECE_CLASS);
+                   .querySelector('.' + PIECE_CLASS);
   };
 
   var updatePieceImage = function(pieceElement, image){
@@ -48,40 +48,40 @@ var Board = function() {
     });
   };
 
-  var movePiece = function(from_square_id, to_square_id) {
-    var from_square = document.getElementById(from_square_id);
-    var to_square = document.getElementById(to_square_id);
-    var piece = board[from_square.dataset.file][from_square.dataset.rank];
+  var movePiece = function(fromSquareId, toSquareId) {
+    var fromSquare = document.getElementById(fromSquareId);
+    var toSquare = document.getElementById(toSquareId);
+    var piece = board[fromSquare.dataset.file][fromSquare.dataset.rank];
 
-    resetPieceElement(getPieceBySquareId(from_square_id));
-    getPieceBySquareId(to_square_id).setAttribute('src', piece.getImagePath());
+    resetPieceElement(getPieceBySquareId(fromSquareId));
+    getPieceBySquareId(toSquareId).setAttribute('src', piece.getImagePath());
 
-    board[to_square.dataset.file][to_square.dataset.rank] = piece;
-    board[from_square.dataset.file][from_square.dataset.rank] = null;
+    board[toSquare.dataset.file][toSquare.dataset.rank] = piece;
+    board[fromSquare.dataset.file][fromSquare.dataset.rank] = null;
   };
 
   var initStartingPositions = function() {
-    addPiece("a", 1, Rook("white"));
-    addPiece("b", 1, Knight("white"));
-    addPiece("c", 1, Bishop("white"));
-    addPiece("d", 1, Queen("white"));
-    addPiece("e", 1, King("white"));
-    addPiece("f", 1, Bishop("white"));
-    addPiece("g", 1, Knight("white"));
-    addPiece("h", 1, Rook("white"));
+    addPiece('a', 1, Rook('white'));
+    addPiece('b', 1, Knight('white'));
+    addPiece('c', 1, Bishop('white'));
+    addPiece('d', 1, Queen('white'));
+    addPiece('e', 1, King('white'));
+    addPiece('f', 1, Bishop('white'));
+    addPiece('g', 1, Knight('white'));
+    addPiece('h', 1, Rook('white'));
 
-    addPiece("a", 8, Rook("black"));
-    addPiece("b", 8, Knight("black"));
-    addPiece("c", 8, Bishop("black"));
-    addPiece("d", 8, King("black"));
-    addPiece("e", 8, Queen("black"));
-    addPiece("f", 8, Bishop("black"));
-    addPiece("g", 8, Knight("black"));
-    addPiece("h", 8, Rook("black"));
+    addPiece('a', 8, Rook('black'));
+    addPiece('b', 8, Knight('black'));
+    addPiece('c', 8, Bishop('black'));
+    addPiece('d', 8, King('black'));
+    addPiece('e', 8, Queen('black'));
+    addPiece('f', 8, Bishop('black'));
+    addPiece('g', 8, Knight('black'));
+    addPiece('h', 8, Rook('black'));
 
     for(var f = 0; f < FILES.length; f++) {
-      addPiece(FILES[f], 2, Pawn("white"));
-      addPiece(FILES[f], 7, Pawn("black"));
+      addPiece(FILES[f], 2, Pawn('white'));
+      addPiece(FILES[f], 7, Pawn('black'));
     }
   };
 
@@ -113,7 +113,7 @@ var Board = function() {
     interact('.dropzone')
       .dropzone({
         ondrop: function (event) {
-          console.log(event.relatedTarget.parentElement.parentElement.id + " to " + event.target.id);
+          console.log(event.relatedTarget.parentElement.parentElement.id + ' to ' + event.target.id);
           movePiece(event.relatedTarget.parentElement.parentElement.id,
                     event.target.id);
         }
