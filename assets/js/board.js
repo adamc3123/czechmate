@@ -36,6 +36,25 @@ var Board = function() {
     updateSquareImage(file, rank, piece.getImagePath());
   };
 
+  var resetPieceElement = function(pieceElement) {
+    var attributesToReset = ['src', 'style', 'data-x', 'data-y'];
+    attributesToReset.forEach(function(attribute){
+      pieceElement.setAttribute(attribute, '');
+    });
+  };
+
+  var movePiece = function(from_square_id, to_square_id) {
+    var from_square = document.getElementById(from_square_id);
+    var to_square = document.getElementById(to_square_id);
+    var piece = board[from_square.dataset.file][from_square.dataset.rank];
+
+    resetPieceElement(from_square.querySelector("." + PIECE_CLASS));
+    to_square.querySelector("." + PIECE_CLASS).src = piece.getImagePath();
+
+    board[to_square.dataset.file][to_square.dataset.rank] = piece;
+    board[from_square.dataset.file][from_square.dataset.rank] = null;
+  };
+
   var initStartingPositions = function() {
     addPiece("a", 1, Rook("white"));
     addPiece("b", 1, Knight("white"));
@@ -67,8 +86,37 @@ var Board = function() {
     initStartingPositions();
   };
 
-  var initialize = function() {
+  var dragMoveListener = function(event) {
+    var target = event.target;
+    var x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx;
+    var y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy;
 
+    target.style.webkitTransform =
+      target.style.transform = 'translate(' + x + 'px, ' + y + 'px)';
+
+    target.setAttribute('data-x', x);
+    target.setAttribute('data-y', y);
+  };
+
+  var initPieceHandlers = function() {
+    interact('.draggable').draggable({
+      listeners: {
+        move: dragMoveListener,
+      },
+    }).styleCursor(false)
+
+    interact('.dropzone')
+      .dropzone({
+        ondrop: function (event) {
+          console.log(event.relatedTarget.parentElement.parentElement.id + " to " + event.target.id);
+          movePiece(event.relatedTarget.parentElement.parentElement.id,
+                    event.target.id);
+        }
+      })
+  }
+
+  var initialize = function() {
+    initPieceHandlers();
   }();
 
   return {

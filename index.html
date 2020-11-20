@@ -16,8 +16,9 @@ files: [a,b,c,d,e,f,g,h]
         {% for row in (1..8) reversed %}
           <tr id="rank_{{row}}">
             {% for col in (0..7) %}
-              <td id="square_{{page.files[col]}}{{row}}" class="cell">
-                <div class="square"><img class="piece" src="assets/images/bdt.svg"></div>
+              <td id="square_{{page.files[col]}}{{row}}" class="cell dropzone"
+                  data-file='{{page.files[col]}}' data-rank='{{row}}'>
+                <div class="square"><img class="piece draggable" draggable="true" src=""></div>
               </td>
             {% endfor %}
           </tr>

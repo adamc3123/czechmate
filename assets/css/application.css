@@ -60,6 +60,12 @@
   text-align: center;
 }
 
+.draggable {
+  touch-action: none;
+  user-select: none;
+  cursor: pointer;
+}
+
 .cell {
   height: calc(600px / 8);
 }
