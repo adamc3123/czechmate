@@ -26,14 +26,19 @@ var Board = function() {
     }
   };
 
-  var updateSquareImage = function(file, rank, image){
-    document.getElementById("square_"+file+rank)
-            .querySelector("." + PIECE_CLASS).src = image;
-  }
+  var getPieceBySquareId = function(squareId) {
+    return document.getElementById(squareId)
+                   .querySelector("." + PIECE_CLASS);
+  };
+
+  var updatePieceImage = function(pieceElement, image){
+    pieceElement.setAttribute('src', image)
+  };
 
   var addPiece = function(file, rank, piece) {
     board[file][rank] = piece;
-    updateSquareImage(file, rank, piece.getImagePath());
+    var pieceElement = getPieceBySquareId('square_'+file+rank);
+    updatePieceImage(pieceElement, piece.getImagePath());
   };
 
   var resetPieceElement = function(pieceElement) {
@@ -48,8 +53,8 @@ var Board = function() {
     var to_square = document.getElementById(to_square_id);
     var piece = board[from_square.dataset.file][from_square.dataset.rank];
 
-    resetPieceElement(from_square.querySelector("." + PIECE_CLASS));
-    to_square.querySelector("." + PIECE_CLASS).src = piece.getImagePath();
+    resetPieceElement(getPieceBySquareId(from_square_id));
+    getPieceBySquareId(to_square_id).setAttribute('src', piece.getImagePath());
 
     board[to_square.dataset.file][to_square.dataset.rank] = piece;
     board[from_square.dataset.file][from_square.dataset.rank] = null;
