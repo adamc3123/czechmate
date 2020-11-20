@@ -3,6 +3,7 @@ var King = function(playerColor) {
   var IMAGES_BASE = "assets/images/";
   var BLACK_KING = IMAGES_BASE + "kdt.svg";
   var WHITE_KING = IMAGES_BASE + "klt.svg";
+  var PIECE_TYPE = 'king';
 
   var player = "";
 
@@ -14,13 +15,18 @@ var King = function(playerColor) {
     return player;
   };
 
+  var getType = function() {
+    return PIECE_TYPE;
+  };
+
   var initialize = function() {
     player = playerColor;
   }();
 
   return {
     getImagePath: getImagePath,
-    getPlayer: getPlayer
+    getPlayer: getPlayer,
+    getType: getType
   };
 };
 
@@ -28,6 +34,7 @@ var Queen = function(playerColor) {
   var IMAGES_BASE = "assets/images/";
   var BLACK_QUEEN = IMAGES_BASE + "qdt.svg";
   var WHITE_QUEEN = IMAGES_BASE + "qlt.svg";
+  var PIECE_TYPE = 'queen';
 
   var player = "";
 
@@ -39,13 +46,18 @@ var Queen = function(playerColor) {
     return player;
   };
 
+  var getType = function() {
+    return PIECE_TYPE;
+  };
+
   var initialize = function() {
     player = playerColor;
   }();
 
   return {
     getImagePath: getImagePath,
-    getPlayer: getPlayer
+    getPlayer: getPlayer,
+    getType: getType
   };
 };
 
@@ -53,6 +65,7 @@ var Rook = function(playerColor) {
   var IMAGES_BASE = "assets/images/";
   var BLACK_ROOK = IMAGES_BASE + "rdt.svg";
   var WHITE_ROOK = IMAGES_BASE + "rlt.svg";
+  var PIECE_TYPE = 'rook';
 
   var player = "";
 
@@ -64,13 +77,18 @@ var Rook = function(playerColor) {
     return player;
   };
 
+  var getType = function() {
+    return PIECE_TYPE;
+  };
+
   var initialize = function() {
     player = playerColor;
   }();
 
   return {
     getImagePath: getImagePath,
-    getPlayer: getPlayer
+    getPlayer: getPlayer,
+    getType: getType
   };
 };
 
@@ -78,6 +96,7 @@ var Bishop = function(playerColor) {
   var IMAGES_BASE = "assets/images/";
   var BLACK_BISHOP = IMAGES_BASE + "bdt.svg";
   var WHITE_BISHOP = IMAGES_BASE + "blt.svg";
+  var PIECE_TYPE = 'bishop';
 
   var player = "";
 
@@ -89,13 +108,18 @@ var Bishop = function(playerColor) {
     return player;
   };
 
+  var getType = function() {
+    return PIECE_TYPE;
+  };
+
   var initialize = function() {
     player = playerColor;
   }();
 
   return {
     getImagePath: getImagePath,
-    getPlayer: getPlayer
+    getPlayer: getPlayer,
+    getType: getType
   };
 };
 
@@ -103,6 +127,7 @@ var Knight = function(playerColor) {
   var IMAGES_BASE = "assets/images/";
   var BLACK_KNIGHT = IMAGES_BASE + "ndt.svg";
   var WHITE_KNIGHT = IMAGES_BASE + "nlt.svg";
+  var PIECE_TYPE = 'knight';
 
   var player = "";
 
@@ -114,13 +139,18 @@ var Knight = function(playerColor) {
     return player;
   };
 
+  var getType = function() {
+    return PIECE_TYPE;
+  };
+
   var initialize = function() {
     player = playerColor;
   }();
 
   return {
     getImagePath: getImagePath,
-    getPlayer: getPlayer
+    getPlayer: getPlayer,
+    getType: getType
   };
 };
 
@@ -128,6 +158,7 @@ var Pawn = function(playerColor) {
   var IMAGES_BASE = "assets/images/";
   var BLACK_PAWN = IMAGES_BASE + "pdt.svg";
   var WHITE_PAWN = IMAGES_BASE + "plt.svg";
+  var PIECE_TYPE = 'pawn';
 
   var player = "";
 
@@ -139,12 +170,17 @@ var Pawn = function(playerColor) {
     return player;
   };
 
+  var getType = function() {
+    return PIECE_TYPE;
+  };
+
   var initialize = function() {
     player = playerColor;
   }();
 
   return {
     getImagePath: getImagePath,
-    getPlayer: getPlayer
+    getPlayer: getPlayer,
+    getType: getType
   };
 };
