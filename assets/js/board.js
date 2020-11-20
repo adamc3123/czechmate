@@ -1,4 +1,4 @@
-var Board = function() {
+var Board = function(movePieceHandlerCallback) {
   var FILES = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
   var RANKS = [1, 2, 3, 4, 5, 6, 7, 8];
   var CELL_CLASS = 'cell';
@@ -6,6 +6,7 @@ var Board = function() {
   var PIECE_CLASS = 'piece';
 
   var board = null;
+  var movePieceHandler = null;
 
   var getPieceBySquareId = function(squareId) {
     return document.getElementById(squareId)
@@ -32,13 +33,27 @@ var Board = function() {
   var movePiece = function(fromSquareId, toSquareId) {
     var fromSquare = document.getElementById(fromSquareId);
     var toSquare = document.getElementById(toSquareId);
-    var piece = board[fromSquare.dataset.file][fromSquare.dataset.rank];
+    var fromSquarePiece = board[fromSquare.dataset.file][fromSquare.dataset.rank];
+    var toSquarePiece = board[toSquare.dataset.file][toSquare.dataset.rank];
 
     resetPieceElement(getPieceBySquareId(fromSquareId));
-    getPieceBySquareId(toSquareId).setAttribute('src', piece.getImagePath());
+    updatePieceImage(getPieceBySquareId(toSquareId), fromSquarePiece.getImagePath());
 
-    board[toSquare.dataset.file][toSquare.dataset.rank] = piece;
+    // Register moves
+
+    if (fromSquareId === toSquareId){
+      return;
+    }
+
     board[fromSquare.dataset.file][fromSquare.dataset.rank] = null;
+    board[toSquare.dataset.file][toSquare.dataset.rank] = fromSquarePiece;
+
+    if (typeof movePieceHandler === 'function') {
+      movePieceHandler(fromSquare.dataset.file, fromSquare.dataset.rank,
+                       toSquare.dataset.file, toSquare.dataset.rank,
+                       fromSquarePiece,
+                       toSquarePiece);
+    }
   };
 
   var dragMoveListener = function(event) {
@@ -62,7 +77,6 @@ var Board = function() {
 
     interact('.' + CELL_CLASS).dropzone({
       ondrop: function (event) {
-        console.log(event.relatedTarget.parentElement.parentElement.id + ' to ' + event.target.id);
         movePiece(event.relatedTarget.parentElement.parentElement.id,
                   event.target.id);
       }
@@ -121,6 +135,7 @@ var Board = function() {
 
   var initialize = function() {
     initPieceHandlers();
+    movePieceHandler = movePieceHandlerCallback;
   }();
 
   return {
