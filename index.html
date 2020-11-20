@@ -16,7 +16,7 @@ files: [a,b,c,d,e,f,g,h]
         {% for row in (1..8) reversed %}
           <tr id="rank_{{row}}">
             {% for col in (0..7) %}
-              <td id="square_{{page.files[col]}}{{row}}" class="cell dropzone"
+              <td id="square_{{page.files[col]}}{{row}}" class="cell"
                   data-file='{{page.files[col]}}' data-rank='{{row}}'>
                 <div class="square"><img class="piece" draggable="true" src=""></div>
               </td>

@@ -1,30 +1,11 @@
 var Board = function() {
   var FILES = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
   var RANKS = [1, 2, 3, 4, 5, 6, 7, 8];
-
+  var CELL_CLASS = 'cell';
   var SQUARE_CLASS = 'square';
   var PIECE_CLASS = 'piece';
 
   var board = null;
-
-  var initBoardHash = function() {
-    board = {};
-
-    for(var f = 0; f < FILES.length; f++) {
-      board[FILES[f]] = {};
-      for(var r = 0; r < RANKS.length; r++) {
-        board[FILES[f]][RANKS[r]] = null;
-      }
-    }
-  };
-
-  var clearBoard = function() {
-    var squares = document.getElementsByClassName(SQUARE_CLASS);
-
-    for (var i = 0; i < squares.length; i++) {
-      resetPieceElement(squares[i].querySelector('.' + PIECE_CLASS));
-    }
-  };
 
   var getPieceBySquareId = function(squareId) {
     return document.getElementById(squareId)
@@ -32,7 +13,7 @@ var Board = function() {
   };
 
   var updatePieceImage = function(pieceElement, image){
-    pieceElement.setAttribute('src', image)
+    pieceElement.setAttribute('src', image);
   };
 
   var addPiece = function(file, rank, piece) {
@@ -60,6 +41,34 @@ var Board = function() {
     board[fromSquare.dataset.file][fromSquare.dataset.rank] = null;
   };
 
+  var dragMoveListener = function(event) {
+    var target = event.target;
+    var x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx;
+    var y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy;
+
+    target.style.webkitTransform =
+      target.style.transform = 'translate(' + x + 'px, ' + y + 'px)';
+
+    target.setAttribute('data-x', x);
+    target.setAttribute('data-y', y);
+  };
+
+  var initPieceHandlers = function() {
+    interact('.' + PIECE_CLASS).draggable({
+      listeners: {
+        move: dragMoveListener,
+      },
+    }).styleCursor(false);
+
+    interact('.' + CELL_CLASS).dropzone({
+      ondrop: function (event) {
+        console.log(event.relatedTarget.parentElement.parentElement.id + ' to ' + event.target.id);
+        movePiece(event.relatedTarget.parentElement.parentElement.id,
+                  event.target.id);
+      }
+    });
+  };
+
   var initStartingPositions = function() {
     addPiece('a', 1, Rook('white'));
     addPiece('b', 1, Knight('white'));
@@ -85,40 +94,30 @@ var Board = function() {
     }
   };
 
+  var initBoardHash = function() {
+    board = {};
+
+    for(var f = 0; f < FILES.length; f++) {
+      board[FILES[f]] = {};
+      for(var r = 0; r < RANKS.length; r++) {
+        board[FILES[f]][RANKS[r]] = null;
+      }
+    }
+  };
+
+  var clearBoard = function() {
+    var squares = document.getElementsByClassName(SQUARE_CLASS);
+
+    for (var i = 0; i < squares.length; i++) {
+      resetPieceElement(squares[i].querySelector('.' + PIECE_CLASS));
+    }
+  };
+
   var newBoard = function() {
     clearBoard();
     initBoardHash();
     initStartingPositions();
   };
-
-  var dragMoveListener = function(event) {
-    var target = event.target;
-    var x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx;
-    var y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy;
-
-    target.style.webkitTransform =
-      target.style.transform = 'translate(' + x + 'px, ' + y + 'px)';
-
-    target.setAttribute('data-x', x);
-    target.setAttribute('data-y', y);
-  };
-
-  var initPieceHandlers = function() {
-    interact('.' + PIECE_CLASS).draggable({
-      listeners: {
-        move: dragMoveListener,
-      },
-    }).styleCursor(false)
-
-    interact('.dropzone')
-      .dropzone({
-        ondrop: function (event) {
-          console.log(event.relatedTarget.parentElement.parentElement.id + ' to ' + event.target.id);
-          movePiece(event.relatedTarget.parentElement.parentElement.id,
-                    event.target.id);
-        }
-      })
-  }
 
   var initialize = function() {
     initPieceHandlers();

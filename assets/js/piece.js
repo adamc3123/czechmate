@@ -14,9 +14,9 @@ var King = function(playerColor) {
     return player;
   };
 
-  var initialize = function(playerColor) {
+  var initialize = function() {
     player = playerColor;
-  }(playerColor);
+  }();
 
   return {
     getImagePath: getImagePath,
@@ -39,9 +39,9 @@ var Queen = function(playerColor) {
     return player;
   };
 
-  var initialize = function(playerColor) {
+  var initialize = function() {
     player = playerColor;
-  }(playerColor);
+  }();
 
   return {
     getImagePath: getImagePath,
@@ -64,9 +64,9 @@ var Rook = function(playerColor) {
     return player;
   };
 
-  var initialize = function(playerColor) {
+  var initialize = function() {
     player = playerColor;
-  }(playerColor);
+  }();
 
   return {
     getImagePath: getImagePath,
@@ -89,9 +89,9 @@ var Bishop = function(playerColor) {
     return player;
   };
 
-  var initialize = function(playerColor) {
+  var initialize = function() {
     player = playerColor;
-  }(playerColor);
+  }();
 
   return {
     getImagePath: getImagePath,
@@ -114,9 +114,9 @@ var Knight = function(playerColor) {
     return player;
   };
 
-  var initialize = function(playerColor) {
+  var initialize = function() {
     player = playerColor;
-  }(playerColor);
+  }();
 
   return {
     getImagePath: getImagePath,
@@ -139,9 +139,9 @@ var Pawn = function(playerColor) {
     return player;
   };
 
-  var initialize = function(playerColor) {
+  var initialize = function() {
     player = playerColor;
-  }(playerColor);
+  }();
 
   return {
     getImagePath: getImagePath,
